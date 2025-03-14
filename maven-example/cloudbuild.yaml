@@ -31,7 +31,7 @@ steps:
     args:
     - run
     - --filename=deployment.yaml
-    - --image=us-central1-docker.pkg.dev/$PROJECT_ID/$REPO_NAME/hellospring
+    - --image=us-central1-docker.pkg.dev/buoyant-program-452814-d6/cloud-build-samples/hellospring
     - --location=${_CLOUDSDK_COMPUTE_REGION}
     - --cluster=${_CLOUDSDK_CONTAINER_CLUSTER}
     dir: maven-example
