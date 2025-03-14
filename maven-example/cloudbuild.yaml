@@ -24,7 +24,7 @@ steps:
   - name: gcr.io/cloud-builders/docker
     args: ["build", "-t", "us-central1-docker.pkg.dev/$PROJECT_ID/$REPO_NAME/hellospring", "--build-arg=JAR_FILE=target/hello-spring-1.0.0.jar", "."]
     dir: maven-example
-  - name: gcr.io/cloud-builders/gke-deploy
+  - name: gcr.io/cloud-builders/gke-deploy:latest
     env:
       - 'CLOUDSDK_COMPUTE_REGION=us-central-1'
       - 'CLOUDSDK_CONTAINER_CLUSTER=autopilot-cluster-1'
