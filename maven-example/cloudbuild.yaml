@@ -30,11 +30,11 @@ steps:
       - 'CLOUDSDK_CONTAINER_CLUSTER=autopilot-cluster-1'
     args:
     - run
+    - --validate=false
     - --filename=deployment.yaml
     - --image=us-central1-docker.pkg.dev/buoyant-program-452814-d6/cloud-build-samples/hellospring:latest
     - --location=${_CLOUDSDK_COMPUTE_REGION}
     - --cluster=${_CLOUDSDK_CONTAINER_CLUSTER}
-    - --validate=false
     dir: maven-example
 images: ["us-central1-docker.pkg.dev/$PROJECT_ID/$REPO_NAME/hellospring"]
 options:
