@@ -24,12 +24,12 @@ steps:
   - name: gcr.io/cloud-builders/docker
     args: ["build", "-t", "us-central1-docker.pkg.dev/$PROJECT_ID/$REPO_NAME/hellospring", "--build-arg=JAR_FILE=target/hello-spring-1.0.0.jar", "."]
     dir: maven-example
-  - name: gcr.io/cloud-builders/gke-deploy:latest
+  - name: gcr.io/cloud-builders/kubectl
     env:
       - 'CLOUDSDK_COMPUTE_REGION=us-central-1'
       - 'CLOUDSDK_CONTAINER_CLUSTER=autopilot-cluster-1'
     args:
-    - run
+    - apply
     - --skip-dry-run
     - --filename=deployment.yaml
     - --image=us-central1-docker.pkg.dev/buoyant-program-452814-d6/cloud-build-samples/hellospring:latest
