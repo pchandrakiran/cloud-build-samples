@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: hellospring
-        image: us-central1-docker.pkg.dev/$PROJECT_ID/$REPO_NAME/hellospring
+        image: us-central1-docker.pkg.dev/buoyant-program-452814-d6/cloud-build-samples/hellospring
       ports:
       - containerPort: 8080
       resources:
