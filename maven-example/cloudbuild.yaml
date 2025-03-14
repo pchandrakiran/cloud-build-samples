@@ -24,17 +24,18 @@ steps:
   - name: gcr.io/cloud-builders/docker
     args: ["build", "-t", "us-central1-docker.pkg.dev/$PROJECT_ID/$REPO_NAME/hellospring", "--build-arg=JAR_FILE=target/hello-spring-1.0.0.jar", "."]
     dir: maven-example
-  - name: gcr.io/cloud-builders/gcloud
-    args: ["container", "clusters", "get-credentials", "autopilot-cluster-1", "--region", "us-central1", "--project", "$PROJECT_ID"]
-    dir: maven-example
-  - name: gcr.io/cloud-builders/kubectl
+  - name: gcr.io/cloud-builders/gke-deploy
     env:
       - 'CLOUDSDK_COMPUTE_REGION=us-central-1'
       - 'CLOUDSDK_CONTAINER_CLUSTER=autopilot-cluster-1'
-    args: ["apply", "-f", "deployment.yaml", "--image=us-central1-docker.pkg.dev/$PROJECT_ID/$REPO_NAME/hellospring"]
+    args:
+    - run
+    - --filename=deployment.yaml
+    - --image=us-central1-docker.pkg.dev/$PROJECT_ID/$REPO_NAME/hellospring
+    - --location=${_CLOUDSDK_COMPUTE_REGION}
+    - --cluster=${_CLOUDSDK_CONTAINER_CLUSTER}
     dir: maven-example
 images: ["us-central1-docker.pkg.dev/$PROJECT_ID/$REPO_NAME/hellospring"]
 options:
-  serviceAccount: 426214265611-compute@developer.gserviceaccount.com
   logging: CLOUD_LOGGING_ONLY
 # [END cloudbuild_maven]
